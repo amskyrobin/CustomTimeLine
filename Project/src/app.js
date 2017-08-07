@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TimelineContainer from './Containers/TimelineContainer.jsx';
+import ContentContainer from './Containers/ContentContainer.jsx';
 
 
 
 window.onload = function() {
   ReactDOM.render(
-  	<TimelineContainer />,
+  	<ContentContainer />,
   	document.getElementById('app')
     )
 }

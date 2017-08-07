@@ -9767,14 +9767,14 @@ var _reactDom = __webpack_require__(98);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _TimelineContainer = __webpack_require__(184);
+var _ContentContainer = __webpack_require__(188);
 
-var _TimelineContainer2 = _interopRequireDefault(_TimelineContainer);
+var _ContentContainer2 = _interopRequireDefault(_ContentContainer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 window.onload = function () {
-  _reactDom2.default.render(_react2.default.createElement(_TimelineContainer2.default, null), document.getElementById('app'));
+  _reactDom2.default.render(_react2.default.createElement(_ContentContainer2.default, null), document.getElementById('app'));
 };
 
 /***/ }),
@@ -22404,7 +22404,10 @@ module.exports = ReactDOMInvalidARIAHook;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 184 */
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22420,9 +22423,113 @@ var _react = __webpack_require__(32);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Timeline = __webpack_require__(185);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _Timeline2 = _interopRequireDefault(_Timeline);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ContentOne = function (_React$Component) {
+	_inherits(ContentOne, _React$Component);
+
+	function ContentOne() {
+		_classCallCheck(this, ContentOne);
+
+		return _possibleConstructorReturn(this, (ContentOne.__proto__ || Object.getPrototypeOf(ContentOne)).apply(this, arguments));
+	}
+
+	_createClass(ContentOne, [{
+		key: "contructor",
+		value: function contructor(props) {}
+	}, {
+		key: "render",
+		value: function render() {
+			return _react2.default.createElement(
+				"div",
+				{ className: "content-one" },
+				_react2.default.createElement(
+					"div",
+					{ className: "timeline-container" },
+					_react2.default.createElement(
+						"button",
+						null,
+						"press"
+					),
+					_react2.default.createElement(
+						"div",
+						{ className: "year-container" },
+						_react2.default.createElement(
+							"div",
+							{ className: "year" },
+							"1948"
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "year" },
+							"1949"
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "year" },
+							"1950"
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "year" },
+							"1951"
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "year" },
+							"1952"
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "year" },
+							"1953"
+						)
+					),
+					_react2.default.createElement(
+						"button",
+						null,
+						"press"
+					)
+				)
+			);
+		}
+	}]);
+
+	return ContentOne;
+}(_react2.default.Component);
+
+exports.default = ContentOne;
+
+/***/ }),
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(32);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ContentOne = __webpack_require__(187);
+
+var _ContentOne2 = _interopRequireDefault(_ContentOne);
+
+var _Splash = __webpack_require__(189);
+
+var _Splash2 = _interopRequireDefault(_Splash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22432,20 +22539,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var TimelineContainer = function (_React$Component) {
-	_inherits(TimelineContainer, _React$Component);
+var ContentContainer = function (_React$Component) {
+	_inherits(ContentContainer, _React$Component);
 
-	function TimelineContainer(props) {
-		_classCallCheck(this, TimelineContainer);
+	function ContentContainer(props) {
+		_classCallCheck(this, ContentContainer);
 
-		var _this = _possibleConstructorReturn(this, (TimelineContainer.__proto__ || Object.getPrototypeOf(TimelineContainer)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (ContentContainer.__proto__ || Object.getPrototypeOf(ContentContainer)).call(this, props));
 
 		_this.assignDivId = _this.assignDivId.bind(_this);
 
 		return _this;
 	}
 
-	_createClass(TimelineContainer, [{
+	_createClass(ContentContainer, [{
 		key: 'handleButtonClick',
 		value: function handleButtonClick(event) {
 			var button = document.getElementById('button');
@@ -22465,18 +22572,23 @@ var TimelineContainer = function (_React$Component) {
 	}, {
 		key: 'render',
 		value: function render() {
-			return _react2.default.createElement(_Timeline2.default, {
-				hideYears: this.assignDivId });
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(_Splash2.default, null),
+				_react2.default.createElement(_ContentOne2.default, {
+					hideYears: this.assignDivId })
+			);
 		}
 	}]);
 
-	return TimelineContainer;
+	return ContentContainer;
 }(_react2.default.Component);
 
-exports.default = TimelineContainer;
+exports.default = ContentContainer;
 
 /***/ }),
-/* 185 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22486,90 +22598,25 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(32);
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var Splash = function Splash(props) {
+	return _react2.default.createElement(
+		'div',
+		null,
+		_react2.default.createElement(
+			'h1',
+			null,
+			'Franklin Income Fund '
+		)
+	);
+};
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Timeline = function (_React$Component) {
-	_inherits(Timeline, _React$Component);
-
-	function Timeline() {
-		_classCallCheck(this, Timeline);
-
-		return _possibleConstructorReturn(this, (Timeline.__proto__ || Object.getPrototypeOf(Timeline)).apply(this, arguments));
-	}
-
-	_createClass(Timeline, [{
-		key: "contructor",
-		value: function contructor(props) {}
-	}, {
-		key: "render",
-		value: function render() {
-			return _react2.default.createElement(
-				"div",
-				{ className: "timeline-container" },
-				_react2.default.createElement(
-					"button",
-					null,
-					"press"
-				),
-				_react2.default.createElement(
-					"div",
-					{ className: "year-container" },
-					_react2.default.createElement(
-						"div",
-						{ className: "year" },
-						"1948"
-					),
-					_react2.default.createElement(
-						"div",
-						{ className: "year" },
-						"1949"
-					),
-					_react2.default.createElement(
-						"div",
-						{ className: "year" },
-						"1950"
-					),
-					_react2.default.createElement(
-						"div",
-						{ className: "year" },
-						"1951"
-					),
-					_react2.default.createElement(
-						"div",
-						{ className: "year" },
-						"1952"
-					),
-					_react2.default.createElement(
-						"div",
-						{ className: "year" },
-						"1953"
-					)
-				),
-				_react2.default.createElement(
-					"button",
-					null,
-					"press"
-				)
-			);
-		}
-	}]);
-
-	return Timeline;
-}(_react2.default.Component);
-
-exports.default = Timeline;
+exports.default = Splash;
 
 /***/ })
 /******/ ]);

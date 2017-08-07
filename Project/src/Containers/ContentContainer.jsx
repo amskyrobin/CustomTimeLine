@@ -1,7 +1,8 @@
 import React from 'react';
-import Timeline from '../Components/Timeline.jsx';
+import ContentOne from '../Components/ContentOne.jsx';
+import Splash from '../Components/Splash.jsx';
 
-class TimelineContainer extends React.Component{
+class ContentContainer extends React.Component{
 
 	constructor(props){
 		super(props)
@@ -32,12 +33,15 @@ class TimelineContainer extends React.Component{
 
 	render(){
 		return (
-			<Timeline 
+			<div>
+			<Splash />
+			<ContentOne 
 			hideYears = {this.assignDivId}/>
+			</div>
 			)
-	}
+		}
 }
 
 
-export default  TimelineContainer;
+export default  ContentContainer;
 
