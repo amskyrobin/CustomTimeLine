@@ -10,7 +10,7 @@ class ContentOne extends React.Component {
 	render () {
 		return (
 		
-		<div className ="content-one">
+		<div className ="content-one" ref={(div) => {this.contentOne = div}}>
 			<div className="timeline-container">
 				<button>press</button>
 					<div className="year-container">

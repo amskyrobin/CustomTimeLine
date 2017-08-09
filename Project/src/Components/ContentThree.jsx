@@ -6,7 +6,7 @@ class ContentThree extends React.Component {
 
 	render () {
 		return (
-			<div> 
+			<div className="content-three"> 
 			</div>
 			)
 	}

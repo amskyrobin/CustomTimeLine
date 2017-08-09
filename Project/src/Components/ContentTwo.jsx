@@ -4,9 +4,13 @@ import React from 'react';
 
 class ContentTwo extends React.Component {
 
+	constructor(props){
+		super(props)
+	}
+
 	render () {
 		return (
-			<div> 
+			<div className="content-two"> 
 			</div>
 			)
 	}
