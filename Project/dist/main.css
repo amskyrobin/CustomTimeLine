@@ -1,3 +1,51 @@
+
+
+
+
+/*----------------------------------------------- SPLASH -------------------------------------------------*/
+
+
+
+
+
+/*----------------------------------------------- NAVBAR --------------------------------------------------*/
+
+.navbar {
+	
+	}
+
+.navbar ul {
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+}
+
+.navbar ul li {
+	flex: 1;
+	padding: 10px;
+
+} 
+
+.navbar ul :nth-child(odd){
+	background-color: grey;
+}
+
+@media screen and (min-width: 600px){
+  .navbar ul {
+   -webkit-flex-direction: row;
+    flex-direction: row;
+  }
+  .navbar ul > * {
+    -webkit-flex: 1;
+    flex: 1;
+  }
+
+
+
+
+
+/*----------------------------------------------- CONTENT ONE ----------------------------------------------*/
+
 .year {
 
 	background-color: tomato;
@@ -18,3 +66,10 @@ button {
 	margin-left: 75px;
 }
 
+
+
+
+
+
+
+/*----------------------------------------------- CONTENT TWO ----------------------------------------------*/

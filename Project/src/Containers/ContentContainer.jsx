@@ -1,6 +1,11 @@
 import React from 'react';
 import ContentOne from '../Components/ContentOne.jsx';
+import ContentTwo from '../Components/ContentTwo.jsx';
+import ContentThree from '../Components/ContentThree.jsx';
+import ContentFour from '../Components/ContentFour.jsx';
+import ContentFive from '../Components/ContentFive.jsx';
 import Splash from '../Components/Splash.jsx';
+import NavBar from '../Components/NavBar.jsx';
 
 class ContentContainer extends React.Component{
 
@@ -35,8 +40,13 @@ class ContentContainer extends React.Component{
 		return (
 			<div>
 			<Splash />
+			<NavBar />
 			<ContentOne 
 			hideYears = {this.assignDivId}/>
+			<ContentTwo />
+			<ContentThree />
+			<ContentFour />
+			<ContentFive />
 			</div>
 			)
 		}
