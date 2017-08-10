@@ -10,7 +10,7 @@ class ContentTwo extends React.Component {
 
 	render () {
 		return (
-			<div className="content-two"> 
+			<div className ="content-two"> 
 			</div>
 			)
 	}

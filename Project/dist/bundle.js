@@ -22465,17 +22465,21 @@ var ContentContainer = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (ContentContainer.__proto__ || Object.getPrototypeOf(ContentContainer)).call(this, props));
 
 		_this.assignDivId = _this.assignDivId.bind(_this);
-		_this.handleNavBarClick = _this.handleNavBarClick.bind(_this);
+		_this.initScroll = _this.initScroll.bind(_this);
+
+		var marginT = 0;
+		var destination = 0;
+		var speed = 5;
 
 		return _this;
 	}
 
 	_createClass(ContentContainer, [{
-		key: 'handleNavBarClick',
-		value: function handleNavBarClick(event) {
-			var button = document.getElementsByTagName('li');
-			console.log("im beiung clicked");
-			button.scroll;
+		key: 'initScroll',
+		value: function initScroll(id) {
+			var destination = document.getElementsByClassName(id);
+
+			console.log(destination);
 		}
 	}, {
 		key: 'assignDivId',
@@ -22497,7 +22501,7 @@ var ContentContainer = function (_React$Component) {
 				null,
 				_react2.default.createElement(_Splash2.default, null),
 				_react2.default.createElement(_NavBar2.default, {
-					handleNavBarClick: this.handleNavBarClick }),
+					initScroll: this.initScroll }),
 				_react2.default.createElement(_ContentOne2.default, {
 					hideYears: this.assignDivId }),
 				_react2.default.createElement(_ContentTwo2.default, null),
@@ -22877,27 +22881,27 @@ var NavBar = function (_React$Component) {
 					null,
 					_react2.default.createElement(
 						"li",
-						{ onClick: this.props.handleNavBarClick },
+						{ onClick: this.props.initScroll("content-one") },
 						"Dividends"
 					),
 					_react2.default.createElement(
 						"li",
-						{ onClick: this.props.handleNavBarClick },
+						{ onClick: this.props.initScroll("content-two") },
 						"Compounding Shares"
 					),
 					_react2.default.createElement(
 						"li",
-						{ onClick: this.props.handleNavBarClick },
+						{ onClick: this.props.initScroll("content-three") },
 						"Impressive Returns"
 					),
 					_react2.default.createElement(
 						"li",
-						{ onClick: this.props.handleNavBarClick },
+						{ onClick: this.props.initScroll("content-four") },
 						"Historical Performance"
 					),
 					_react2.default.createElement(
 						"li",
-						{ onClick: this.props.handleNavBarClick },
+						{ onClick: this.props.initScroll("content-five") },
 						"Flexible Approach"
 					)
 				)

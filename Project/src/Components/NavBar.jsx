@@ -6,16 +6,16 @@ class NavBar extends React.Component {
 		super(props)
 	}
 
-
+	
 	render () {
 		return (
 				<div className="navbar">
 					<ul>	
-						<li onClick={this.props.handleNavBarClick}>Dividends</li>
-						<li onClick={this.props.handleNavBarClick}>Compounding Shares</li>
-						<li onClick={this.props.handleNavBarClick}>Impressive Returns</li>
-						<li onClick={this.props.handleNavBarClick}>Historical Performance</li>
-						<li onClick={this.props.handleNavBarClick}>Flexible Approach</li>
+						<li onClick={this.props.initScroll("content-one")}>Dividends</li>
+						<li onClick={this.props.initScroll("content-two")}>Compounding Shares</li>
+						<li onClick={this.props.initScroll("content-three")}>Impressive Returns</li>
+						<li onClick={this.props.initScroll("content-four")}>Historical Performance</li>
+						<li onClick={this.props.initScroll("content-five")}>Flexible Approach</li>
 					</ul>
 				</div>
 

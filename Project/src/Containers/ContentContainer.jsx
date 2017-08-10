@@ -12,17 +12,22 @@ class ContentContainer extends React.Component{
 	constructor(props){
 		super(props)
 		this.assignDivId = this.assignDivId.bind(this); 
-		this.handleNavBarClick = this.handleNavBarClick.bind(this);
+		this.initScroll = this.initScroll.bind(this);
+
+		var marginT = 0;
+		var destination = 0;
+		var speed = 5;
+
 
 	}
 
 
-	handleNavBarClick(event){
-		const button = document.getElementsByTagName('li');
-		console.log("im beiung clicked");
-		button.scroll;
+	initScroll(id){
+		var destination = document.getElementsByClassName(id);
 
-
+		
+		console.log(destination);
+		
 	}
 
 	assignDivId () {
@@ -45,7 +50,7 @@ class ContentContainer extends React.Component{
 			<div>
 			<Splash />
 			<NavBar 
-			handleNavBarClick = {this.handleNavBarClick}/>
+			initScroll = {this.initScroll}/>
 			<ContentOne 
 			hideYears = {this.assignDivId}/>
 			<ContentTwo />
