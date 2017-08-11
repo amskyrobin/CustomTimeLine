@@ -14,21 +14,37 @@ class ContentContainer extends React.Component{
 		this.assignDivId = this.assignDivId.bind(this); 
 		this.initScroll = this.initScroll.bind(this);
 
-		var marginT = 0;
+		var marginY = 0;
 		var destination = 0;
 		var speed = 5;
+		var scroller = null;
 
 
 	}
 
 
 	initScroll(id){
-		var destination = document.getElementsByClassName(id);
+		var destination = document.getElementsByClassName(id)[0].offsetTop;
+		var navButton = document.getElementsByTagName('li');
 
-		
-		console.log(destination);
+
+		scroller = setTimeout(function(){
+			initScroll(id);
+		}, 1000).bind(this);
+
+		marginY = marginY + speed;
+
+		if (marginY >= destination){
+			clearTimeout(scroller);
+		}
+
+		window.scroll(0, destination);
 		
 	}
+
+
+
+
 
 	assignDivId () {
 		var container = document.getElementsByClassName('year-container')[0].children;

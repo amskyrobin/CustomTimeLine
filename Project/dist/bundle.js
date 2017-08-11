@@ -22467,20 +22467,42 @@ var ContentContainer = function (_React$Component) {
 		_this.assignDivId = _this.assignDivId.bind(_this);
 		_this.initScroll = _this.initScroll.bind(_this);
 
-		var marginT = 0;
+		var marginY = 0;
 		var destination = 0;
 		var speed = 5;
+		var scroller = null;
 
 		return _this;
 	}
 
 	_createClass(ContentContainer, [{
 		key: 'initScroll',
-		value: function initScroll(id) {
-			var destination = document.getElementsByClassName(id);
+		value: function (_initScroll) {
+			function initScroll(_x) {
+				return _initScroll.apply(this, arguments);
+			}
 
-			console.log(destination);
-		}
+			initScroll.toString = function () {
+				return _initScroll.toString();
+			};
+
+			return initScroll;
+		}(function (id) {
+			var destination = document.getElementsByClassName(id)[0].offsetTop;
+			var navButton = document.getElementsByTagName('li');
+
+			scroller = setTimeout(function () {
+				initScroll(id);
+			}, 1000).bind(this);
+
+			marginY = marginY + speed;
+
+			if (marginY >= destination) {
+				clearTimeout(scroller);
+			}
+
+			window.scroll(0, destination);
+		})
 	}, {
 		key: 'assignDivId',
 		value: function assignDivId() {
@@ -22873,6 +22895,8 @@ var NavBar = function (_React$Component) {
 	_createClass(NavBar, [{
 		key: "render",
 		value: function render() {
+			var _this2 = this;
+
 			return _react2.default.createElement(
 				"div",
 				{ className: "navbar" },
@@ -22881,27 +22905,37 @@ var NavBar = function (_React$Component) {
 					null,
 					_react2.default.createElement(
 						"li",
-						{ onClick: this.props.initScroll("content-one") },
+						{ onClick: function onClick() {
+								_this2.props.initScroll("content-one");
+							} },
 						"Dividends"
 					),
 					_react2.default.createElement(
 						"li",
-						{ onClick: this.props.initScroll("content-two") },
+						{ onClick: function onClick() {
+								_this2.props.initScroll("content-two");
+							} },
 						"Compounding Shares"
 					),
 					_react2.default.createElement(
 						"li",
-						{ onClick: this.props.initScroll("content-three") },
+						{ onClick: function onClick() {
+								_this2.props.initScroll("content-three");
+							} },
 						"Impressive Returns"
 					),
 					_react2.default.createElement(
 						"li",
-						{ onClick: this.props.initScroll("content-four") },
+						{ onClick: function onClick() {
+								_this2.props.initScroll("content-four");
+							} },
 						"Historical Performance"
 					),
 					_react2.default.createElement(
 						"li",
-						{ onClick: this.props.initScroll("content-five") },
+						{ onClick: function onClick() {
+								_this2.props.initScroll("content-five");
+							} },
 						"Flexible Approach"
 					)
 				)

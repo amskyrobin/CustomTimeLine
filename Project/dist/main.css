@@ -87,3 +87,54 @@ button {
 
 
 /*----------------------------------------------- CONTENT TWO ----------------------------------------------*/
+
+.content-two {
+	display: flex;
+	background-color: lightblue;
+	height:700px;
+
+}
+
+
+
+
+/*----------------------------------------------- CONTENT THREE ----------------------------------------------*/
+
+
+
+.content-three {
+	display: flex;
+	background-color: dodgerblue;
+	height:700px;
+
+}
+
+
+
+
+
+
+
+
+/*----------------------------------------------- CONTENT FOUR ----------------------------------------------*/
+
+
+.content-four {
+	display: flex;
+	background-color: orange;
+	height:700px;
+
+}
+
+
+
+
+
+/*----------------------------------------------- CONTENT FIVE ----------------------------------------------*/
+
+.content-five {
+	display: flex;
+	background-color: salmon;
+	height:700px;
+
+}
