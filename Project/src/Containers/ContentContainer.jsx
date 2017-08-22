@@ -6,6 +6,7 @@ import ContentFour from '../Components/ContentFour.jsx';
 import ContentFive from '../Components/ContentFive.jsx';
 import Splash from '../Components/Splash.jsx';
 import NavBar from '../Components/NavBar.jsx';
+import FontAwesome from 'react-fontawesome';
 
 class ContentContainer extends React.Component{
 
@@ -14,31 +15,36 @@ class ContentContainer extends React.Component{
 		this.assignDivId = this.assignDivId.bind(this); 
 		this.initScroll = this.initScroll.bind(this);
 
-		var marginY = 0;
-		var destination = 0;
-		var speed = 5;
-		var scroller = null;
 
 
 	}
 
 
+
+
 	initScroll(id){
 		var destination = document.getElementsByClassName(id)[0].offsetTop;
 		var navButton = document.getElementsByTagName('li');
+		var marginY = 0;
+		// var destination = 0;
+		var speed = 10;
+		// var scroller = null;
+		var counter = 0;
 
 
-		scroller = setTimeout(function(){
-			initScroll(id);
-		}, 1000).bind(this);
-
-		marginY = marginY + speed;
-
-		if (marginY >= destination){
-			clearTimeout(scroller);
+		function scroller(){
+			if (destination >= marginY){
+				counter = marginY += speed;
+				window.scroll(0, counter)
+				console.log(counter);
+				setTimeout(scroller, 1)
+			} else {
+				clearTimeout(scroller);
+			}
 		}
 
-		window.scroll(0, destination);
+		scroller()
+
 		
 	}
 

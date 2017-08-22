@@ -9771,6 +9771,10 @@ var _ContentContainer = __webpack_require__(184);
 
 var _ContentContainer2 = _interopRequireDefault(_ContentContainer);
 
+var _reactFontawesome = __webpack_require__(192);
+
+var _reactFontawesome2 = _interopRequireDefault(_reactFontawesome);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 window.onload = function () {
@@ -22448,6 +22452,10 @@ var _NavBar = __webpack_require__(191);
 
 var _NavBar2 = _interopRequireDefault(_NavBar);
 
+var _reactFontawesome = __webpack_require__(192);
+
+var _reactFontawesome2 = _interopRequireDefault(_reactFontawesome);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22467,42 +22475,33 @@ var ContentContainer = function (_React$Component) {
 		_this.assignDivId = _this.assignDivId.bind(_this);
 		_this.initScroll = _this.initScroll.bind(_this);
 
-		var marginY = 0;
-		var destination = 0;
-		var speed = 5;
-		var scroller = null;
-
 		return _this;
 	}
 
 	_createClass(ContentContainer, [{
 		key: 'initScroll',
-		value: function (_initScroll) {
-			function initScroll(_x) {
-				return _initScroll.apply(this, arguments);
-			}
-
-			initScroll.toString = function () {
-				return _initScroll.toString();
-			};
-
-			return initScroll;
-		}(function (id) {
+		value: function initScroll(id) {
 			var destination = document.getElementsByClassName(id)[0].offsetTop;
 			var navButton = document.getElementsByTagName('li');
+			var marginY = 0;
+			// var destination = 0;
+			var speed = 10;
+			// var scroller = null;
+			var counter = 0;
 
-			scroller = setTimeout(function () {
-				initScroll(id);
-			}, 1000).bind(this);
-
-			marginY = marginY + speed;
-
-			if (marginY >= destination) {
-				clearTimeout(scroller);
+			function scroller() {
+				if (destination >= marginY) {
+					counter = marginY += speed;
+					window.scroll(0, counter);
+					console.log(counter);
+					setTimeout(scroller, 1);
+				} else {
+					clearTimeout(scroller);
+				}
 			}
 
-			window.scroll(0, destination);
-		})
+			scroller();
+		}
 	}, {
 		key: 'assignDivId',
 		value: function assignDivId() {
@@ -22842,17 +22841,28 @@ var _react = __webpack_require__(12);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactFontawesome = __webpack_require__(192);
+
+var _reactFontawesome2 = _interopRequireDefault(_reactFontawesome);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Splash = function Splash(props) {
 	return _react2.default.createElement(
-		"div",
-		{ className: "splash" },
+		'div',
+		{ className: 'splash' },
 		_react2.default.createElement(
-			"h1",
+			'h1',
 			null,
-			"Franklin Income Fund "
-		)
+			'Franklin Income Fund '
+		),
+		_react2.default.createElement(_reactFontawesome2.default, {
+			className: 'super-crazy-colours',
+			name: 'rocket',
+			size: '2x',
+			spin: true,
+			style: { textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }
+		})
 	);
 };
 
@@ -22947,6 +22957,278 @@ var NavBar = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = NavBar;
+
+/***/ }),
+/* 192 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(12);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(193);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _screenReaderStyles = __webpack_require__(195);
+
+var _screenReaderStyles2 = _interopRequireDefault(_screenReaderStyles);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+ * A React component for the font-awesome icon library.
+ *
+ * @param {String} [ariaLabel] An extra accessibility label to put on the icon
+ * @param {Boolean} [border=false] Whether or not to show a border radius
+ * @param {String} [className] An extra set of CSS classes to add to the component
+ * @param {Object} [cssModule] Option to pass FontAwesome CSS as a module
+ * @param {Boolean} [fixedWidth=false] Make buttons fixed width
+ * @param {String} [flip=false] Flip the icon's orientation.
+ * @param {Boolean} [inverse=false]Inverse the icon's color
+ * @param {String} name Name of the icon to use
+ * @param {Boolean} [pulse=false] Rotate icon with 8 steps, rather than smoothly
+ * @param {Number} [rotate] The degress to rotate the icon by
+ * @param {String} [size] The icon scaling size
+ * @param {Boolean} [spin=false] Spin the icon
+ * @param {String} [stack] Stack an icon on top of another
+ * @param {String} [tag=span] The HTML tag to use as a string, eg 'i' or 'em'
+ * @module FontAwesome
+ * @type {ReactClass}
+ */
+var FontAwesome = function (_React$Component) {
+  _inherits(FontAwesome, _React$Component);
+
+  function FontAwesome() {
+    _classCallCheck(this, FontAwesome);
+
+    var _this = _possibleConstructorReturn(this, (FontAwesome.__proto__ || Object.getPrototypeOf(FontAwesome)).call(this));
+
+    _this.displayName = 'FontAwesome';
+    return _this;
+  }
+
+  _createClass(FontAwesome, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          border = _props.border,
+          cssModule = _props.cssModule,
+          className = _props.className,
+          fixedWidth = _props.fixedWidth,
+          flip = _props.flip,
+          inverse = _props.inverse,
+          name = _props.name,
+          pulse = _props.pulse,
+          rotate = _props.rotate,
+          size = _props.size,
+          spin = _props.spin,
+          stack = _props.stack,
+          _props$tag = _props.tag,
+          tag = _props$tag === undefined ? 'span' : _props$tag,
+          ariaLabel = _props.ariaLabel,
+          props = _objectWithoutProperties(_props, ['border', 'cssModule', 'className', 'fixedWidth', 'flip', 'inverse', 'name', 'pulse', 'rotate', 'size', 'spin', 'stack', 'tag', 'ariaLabel']);
+
+      var classNames = [];
+
+      if (cssModule) {
+        classNames.push(cssModule['fa']);
+        classNames.push(cssModule['fa-' + name]);
+        size && classNames.push(cssModule['fa-' + size]);
+        spin && classNames.push(cssModule['fa-spin']);
+        pulse && classNames.push(cssModule['fa-pulse']);
+        border && classNames.push(cssModule['fa-border']);
+        fixedWidth && classNames.push(cssModule['fa-fw']);
+        inverse && classNames.push(cssModule['fa-inverse']);
+        flip && classNames.push(cssModule['fa-flip-' + flip]);
+        rotate && classNames.push(cssModule['fa-rotate-' + rotate]);
+        stack && classNames.push(cssModule['fa-stack-' + stack]);
+      } else {
+        classNames.push('fa');
+        classNames.push('fa-' + name);
+        size && classNames.push('fa-' + size);
+        spin && classNames.push('fa-spin');
+        pulse && classNames.push('fa-pulse');
+        border && classNames.push('fa-border');
+        fixedWidth && classNames.push('fa-fw');
+        inverse && classNames.push('fa-inverse');
+        flip && classNames.push('fa-flip-' + flip);
+        rotate && classNames.push('fa-rotate-' + rotate);
+        stack && classNames.push('fa-stack-' + stack);
+      }
+
+      // Add any custom class names at the end.
+      className && classNames.push(className);
+      return _react2.default.createElement(tag, _extends({}, props, { 'aria-hidden': true, className: classNames.join(' ') }), ariaLabel ? _react2.default.createElement('span', { style: _screenReaderStyles2.default }, ariaLabel) : null);
+    }
+  }]);
+
+  return FontAwesome;
+}(_react2.default.Component);
+
+FontAwesome.propTypes = {
+  ariaLabel: _propTypes2.default.string,
+  border: _propTypes2.default.bool,
+  className: _propTypes2.default.string,
+  cssModule: _propTypes2.default.object,
+  fixedWidth: _propTypes2.default.bool,
+  flip: _propTypes2.default.oneOf(['horizontal', 'vertical']),
+  inverse: _propTypes2.default.bool,
+  name: _propTypes2.default.string.isRequired,
+  pulse: _propTypes2.default.bool,
+  rotate: _propTypes2.default.oneOf([90, 180, 270]),
+  size: _propTypes2.default.oneOf(['lg', '2x', '3x', '4x', '5x']),
+  spin: _propTypes2.default.bool,
+  stack: _propTypes2.default.oneOf(['1x', '2x']),
+  tag: _propTypes2.default.string
+};
+
+exports.default = FontAwesome;
+module.exports = exports['default'];
+
+/***/ }),
+/* 193 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+if (process.env.NODE_ENV !== 'production') {
+  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+    Symbol.for &&
+    Symbol.for('react.element')) ||
+    0xeac7;
+
+  var isValidElement = function(object) {
+    return typeof object === 'object' &&
+      object !== null &&
+      object.$$typeof === REACT_ELEMENT_TYPE;
+  };
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = __webpack_require__(92)(isValidElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = __webpack_require__(194)();
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 194 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+
+
+var emptyFunction = __webpack_require__(9);
+var invariant = __webpack_require__(1);
+var ReactPropTypesSecret = __webpack_require__(56);
+
+module.exports = function() {
+  function shim(props, propName, componentName, location, propFullName, secret) {
+    if (secret === ReactPropTypesSecret) {
+      // It is still safe when called from React.
+      return;
+    }
+    invariant(
+      false,
+      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+      'Use PropTypes.checkPropTypes() to call them. ' +
+      'Read more at http://fb.me/use-check-prop-types'
+    );
+  };
+  shim.isRequired = shim;
+  function getShim() {
+    return shim;
+  };
+  // Important!
+  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+  var ReactPropTypes = {
+    array: shim,
+    bool: shim,
+    func: shim,
+    number: shim,
+    object: shim,
+    string: shim,
+    symbol: shim,
+
+    any: shim,
+    arrayOf: getShim,
+    element: shim,
+    instanceOf: getShim,
+    node: shim,
+    objectOf: getShim,
+    oneOf: getShim,
+    oneOfType: getShim,
+    shape: getShim
+  };
+
+  ReactPropTypes.checkPropTypes = emptyFunction;
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+
+/***/ }),
+/* 195 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  position: 'absolute',
+  width: '1px',
+  height: '1px',
+  padding: '0px',
+  margin: '-1px',
+  overflow: 'hidden',
+  clip: 'rect(0px, 0px, 0px, 0px)',
+  border: '0px'
+};
+module.exports = exports['default'];
 
 /***/ })
 /******/ ]);
