@@ -22484,14 +22484,15 @@ var ContentContainer = function (_React$Component) {
 			var destination = document.getElementsByClassName(id)[0].offsetTop;
 			var navButton = document.getElementsByTagName('li');
 			var marginY = 0;
-			// var destination = 0;
 			var speed = 10;
 			// var scroller = null;
 			var counter = 0;
+			var currentPosition = window.pageYOffset;
+			console.log(currentPosition);
 
 			function scroller() {
-				if (destination >= marginY) {
-					counter = marginY += speed;
+				if (destination >= currentPosition) {
+					counter = currentPosition += speed;
 					window.scroll(0, counter);
 					console.log(counter);
 					setTimeout(scroller, 1);
@@ -22885,6 +22886,10 @@ var _react = __webpack_require__(12);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactFontawesome = __webpack_require__(192);
+
+var _reactFontawesome2 = _interopRequireDefault(_reactFontawesome);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22903,50 +22908,50 @@ var NavBar = function (_React$Component) {
 	}
 
 	_createClass(NavBar, [{
-		key: "render",
+		key: 'render',
 		value: function render() {
 			var _this2 = this;
 
 			return _react2.default.createElement(
-				"div",
-				{ className: "navbar" },
+				'div',
+				{ className: 'navbar' },
 				_react2.default.createElement(
-					"ul",
+					'ul',
 					null,
 					_react2.default.createElement(
-						"li",
+						'li',
 						{ onClick: function onClick() {
 								_this2.props.initScroll("content-one");
 							} },
-						"Dividends"
+						'69 Years of Dividends'
 					),
 					_react2.default.createElement(
-						"li",
+						'li',
 						{ onClick: function onClick() {
 								_this2.props.initScroll("content-two");
 							} },
-						"Compounding Shares"
+						'Compounding = More Shares'
 					),
 					_react2.default.createElement(
-						"li",
+						'li',
 						{ onClick: function onClick() {
 								_this2.props.initScroll("content-three");
 							} },
-						"Impressive Returns"
+						'Impressive Returns Following Downturns'
 					),
 					_react2.default.createElement(
-						"li",
+						'li',
 						{ onClick: function onClick() {
 								_this2.props.initScroll("content-four");
 							} },
-						"Historical Performance"
+						'Performance Across Economic Environments'
 					),
 					_react2.default.createElement(
-						"li",
+						'li',
 						{ onClick: function onClick() {
 								_this2.props.initScroll("content-five");
 							} },
-						"Flexible Approach"
+						'Flexible Approach'
 					)
 				)
 			);

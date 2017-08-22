@@ -26,15 +26,16 @@ class ContentContainer extends React.Component{
 		var destination = document.getElementsByClassName(id)[0].offsetTop;
 		var navButton = document.getElementsByTagName('li');
 		var marginY = 0;
-		// var destination = 0;
 		var speed = 10;
 		// var scroller = null;
 		var counter = 0;
+		var currentPosition = window.pageYOffset;
+		console.log(currentPosition);
 
 
 		function scroller(){
-			if (destination >= marginY){
-				counter = marginY += speed;
+			if (destination >= currentPosition){
+				counter = currentPosition += speed;
 				window.scroll(0, counter)
 				console.log(counter);
 				setTimeout(scroller, 1)
