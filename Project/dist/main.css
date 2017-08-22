@@ -1,4 +1,8 @@
+@font-face {
+	font-family: brela;
+	src: url(./assets/brelaregular.otf);
 
+}
 
 
 
@@ -9,6 +13,7 @@
 	display: flex;
 	background-color: #0046dc;
 	height:700px;
+	font-family: brela;
 }
 
 
