@@ -4,6 +4,25 @@
 
 }
 
+@font-face {
+	font-family: luthier;
+	src: url(./assets/Luthier-Regular.ttf);
+}
+
+@font-face {
+	font-family: aileron;
+	src: url(./assets/Aileron-Regular.otf);
+}
+
+@font-face {
+	font-family: agane;
+	src: url(./assets/Aganè 55(roman).ttf);
+}
+
+body {
+	margin: 0;
+}
+
 
 
 /*----------------------------------------------- SPLASH -------------------------------------------------*/
@@ -14,6 +33,8 @@
 	background-color: #0046dc;
 	height:700px;
 	font-family: brela;
+	color: white;
+	font-size: 40px;
 }
 
 
@@ -27,12 +48,15 @@
 	list-style-type: none;
 	display: flex;
 	flex-direction: column;
+	padding-left: 0;
+
 }
 
 .navbar ul li {
 	flex: 1;
 	padding: 10px;
 	cursor: pointer; cursor: hand;
+
 
 } 
 
