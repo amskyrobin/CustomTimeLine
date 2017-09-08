@@ -10,26 +10,33 @@ function createChart(dom, props){
 	{name: "equity", count: 31}
 	];
 
+	var width = props.width;
+  	var height = props.height;
+    	width = width + 200;
 
-  var width = props.width;
-  var height = props.height;
-    width = width + 200;
-  // var data = props.data;
+//takes data and returns the total value of the dataset (100) 
   var sum = data.reduce(function(memo, num){ return memo + num.count; }, 0);
   console.log(sum);
 
+//selects the dom appends svg element. The "g" element groups svg shapes that are created together and they will move together accordingly
   var chart = d3.select(dom).append('svg').attr('class', 'd3').attr('width', width).attr('height', height)
         .append("g")
           .attr("transform", "translate(" + (props.width/2) + "," + (height/2) + ")");
+  
+
+// draws the pie charts innner and outer circles 
   var outerRadius = props.width/2.2;
   var innerRadius = props.width/8;
   var arc = d3.arc()
       .outerRadius(outerRadius)
       .innerRadius(innerRadius);
 
+//.pie creates angles needed for each datum
   var colors = ['#FD9827', '#DA3B21', '#3669C9', '#1D9524', '#971497'];
   var pie = d3.pie()
       .value(function (d) { return d.count; });
+
+// 
 
   var g = chart.selectAll(".arc")
         .data(pie(data))
@@ -42,7 +49,7 @@ function createChart(dom, props){
           d3.select(this)
             .transition()
             .duration(500)
-            .ease('bounce')
+            .ease(d3.easeBounce)
             .attr('transform', function (d) {
               var dist = 10;
               d.midAngle = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
@@ -59,7 +66,7 @@ function createChart(dom, props){
             d3.select(this)
             .transition()
             .duration(500)
-            .ease('bounce')
+            .ease(d3.easeBounce)
             .attr('transform', 'translate(0,0)');
             d3.select("#percent").remove();
             g.filter(function(e) { return e.value != d.value; }).style('opacity',1)
@@ -75,6 +82,10 @@ function createChart(dom, props){
            return arc(d);
          }
     });
+
+
+//
+
   var center = 
   g.filter(function(d) { return d.endAngle - d.startAngle > .1; }).append("text").style("fill", "white")
     .attr('transform', function(d){
@@ -82,6 +93,8 @@ function createChart(dom, props){
     })
     .attr("text-anchor", "middle").attr("dy", ".35em")
     .text(function(d) { return d.value; });
+
+//  
 
     var legend = chart.selectAll(".legend")
     .data(data)
@@ -107,6 +120,9 @@ function createChart(dom, props){
           }
         return text;
     }).style('opacity', 0);
+
+
+ //calls the animations for the legend text and key       
     rect.transition().delay(function(d, i) { return i * 400; }).duration(1000).style('opacity',1);
     name.transition().delay(function(d, i) { return i * 400; }).duration(1000).style('opacity',1);
  
@@ -115,6 +131,10 @@ function createChart(dom, props){
 
 
 class PieChart extends React.Component {
+
+	constructor(props){
+		super(props)
+	}
 
 	static get defaultProps () {
 		return {
@@ -137,6 +157,7 @@ class PieChart extends React.Component {
 		var dom = ReactDOM.findDOMNode(this);
 		console.log(dom)
 		createChart(dom, this.props)
+
 	}
 
 
