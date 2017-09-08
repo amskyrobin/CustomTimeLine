@@ -1,5 +1,5 @@
 import React from 'react';
-import d3 from 'd3';
+import * as d3 from 'd3';
 import ReactDOM from 'react-dom';
 
 function createChart(dom, props){
@@ -8,9 +8,9 @@ function createChart(dom, props){
 	{name: "fixed income", count: 68},
 	{name: "cash", count: 1 },
 	{name: "equity", count: 31}
-];
+	];
 
-console.log(data);
+
   var width = props.width;
   var height = props.height;
     width = width + 200;
@@ -23,12 +23,12 @@ console.log(data);
           .attr("transform", "translate(" + (props.width/2) + "," + (height/2) + ")");
   var outerRadius = props.width/2.2;
   var innerRadius = props.width/8;
-  var arc = d3.svg.arc()
+  var arc = d3.arc()
       .outerRadius(outerRadius)
       .innerRadius(innerRadius);
 
   var colors = ['#FD9827', '#DA3B21', '#3669C9', '#1D9524', '#971497'];
-  var pie = d3.layout.pie()
+  var pie = d3.pie()
       .value(function (d) { return d.count; });
 
   var g = chart.selectAll(".arc")
@@ -135,12 +135,14 @@ class PieChart extends React.Component {
 	}
 	componentDidMount () {
 		var dom = ReactDOM.findDOMNode(this);
+		console.log(dom)
 		createChart(dom, this.props)
 	}
 
 
 	  shouldComponentUpdate () {
       var dom =  ReactDOM.findDOMNode(this);
+      console.log(dom)
       createChart(dom, this.props);
       return false;
   }
