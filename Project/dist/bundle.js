@@ -23293,7 +23293,7 @@ function createChart(dom, props) {
   width = width + 200;
 
   var data = props.data;
-  console.log(props);
+  // console.log(props)
 
   //takes data and returns the total value of the dataset (100) 
   var sum = data.reduce(function (memo, num) {
@@ -23301,7 +23301,7 @@ function createChart(dom, props) {
   }, 0);
   // console.log(sum);
 
-  //selects the dom appends svg element. The "g" element groups svg shapes that are created together and they will move together accordingly
+  //selects the dom appends svg element. The "g" (container) element groups svg shapes that are created together and they will move together accordingly
   var chart = d3.select(dom).append('svg').attr('class', 'd3').attr('width', width).attr('height', height).append("g").attr("transform", "translate(" + props.width / 2 + "," + height / 2 + ")");
 
   // draws the pie charts innner and outer circles 
@@ -23315,11 +23315,9 @@ function createChart(dom, props) {
     return d.count;
   });
 
-  // 
+  // binds the data to the current selection (the arc)
 
-  var g = chart.selectAll(".arc").data(pie(data)).enter().append("g").attr("class", "arc").on("click", function (d) {
-    alert('you clicked ' + d.data.name);
-  }).on('mouseover', function (d, i) {
+  var g = chart.selectAll(".arc").data(pie(data)).enter().append("g").attr("class", "arc").on('mouseover', function (d, i) {
     d3.select(this).transition().duration(500).ease(d3.easeBounce).attr('transform', function (d) {
       var dist = 10;
       d.midAngle = (d.endAngle - d.startAngle) / 2 + d.startAngle;
@@ -23335,6 +23333,8 @@ function createChart(dom, props) {
     g.filter(function (e) {
       return e.value != d.value;
     }).style('opacity', 0.5);
+
+    //on mouse out removes the transition and percentage number from showing
   }).on('mouseout', function (d, i) {
     d3.select(this).transition().duration(500).ease(d3.easeBounce).attr('transform', 'translate(0,0)');
     d3.select("#percent").remove();
@@ -23343,11 +23343,14 @@ function createChart(dom, props) {
     }).style('opacity', 1);
   });
 
+  //creates the path and animations
+
   g.append("path").style("fill", function (d, i) {
     return colors[i];
   }).transition().delay(function (d, i) {
-    return i * 400;
+    return i * 800;
   }).duration(500).attrTween('d', function (d) {
+    console.log(d);
     var i = d3.interpolate(d.startAngle, d.endAngle);
     return function (t) {
       d.endAngle = i(t);
@@ -23355,7 +23358,7 @@ function createChart(dom, props) {
     };
   });
 
-  //
+  // adds text to the center of each arc
 
   var center = g.filter(function (d) {
     return d.endAngle - d.startAngle > .1;
@@ -23365,7 +23368,7 @@ function createChart(dom, props) {
     return d.value;
   });
 
-  //  
+  //  bellow creates the legend 
 
   var legend = chart.selectAll(".legend").data(data).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
     return "translate(150," + -i * 20 + ")";
