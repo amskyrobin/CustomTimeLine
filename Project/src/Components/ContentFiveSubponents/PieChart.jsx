@@ -4,19 +4,18 @@ import ReactDOM from 'react-dom';
 
 function createChart(dom, props){
 
-	var data = [
-	{name: "fixed income", count: 68},
-	{name: "cash", count: 1 },
-	{name: "equity", count: 31}
-	];
+
 
 	var width = props.width;
   	var height = props.height;
     	width = width + 200;
 
+      var data = props.data;
+      console.log(props)
+
 //takes data and returns the total value of the dataset (100) 
   var sum = data.reduce(function(memo, num){ return memo + num.count; }, 0);
-  console.log(sum);
+  // console.log(sum);
 
 //selects the dom appends svg element. The "g" element groups svg shapes that are created together and they will move together accordingly
   var chart = d3.select(dom).append('svg').attr('class', 'd3').attr('width', width).attr('height', height)
@@ -148,6 +147,7 @@ class PieChart extends React.Component {
 
 
 	render () {
+    // console.log(this.props)
 		return (
 			<div>
 			</div>
@@ -155,7 +155,7 @@ class PieChart extends React.Component {
 	}
 	componentDidMount () {
 		var dom = ReactDOM.findDOMNode(this);
-		console.log(dom)
+		// console.log(dom)
 		createChart(dom, this.props)
 
 	}
@@ -163,7 +163,7 @@ class PieChart extends React.Component {
 
 	  shouldComponentUpdate () {
       var dom =  ReactDOM.findDOMNode(this);
-      console.log(dom)
+      // console.log(dom)
       createChart(dom, this.props);
       return false;
   }
