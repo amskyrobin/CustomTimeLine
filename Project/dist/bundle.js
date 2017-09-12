@@ -22945,9 +22945,13 @@ var _react = __webpack_require__(12);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _PieChart = __webpack_require__(196);
+var _PieChart = __webpack_require__(197);
 
 var _PieChart2 = _interopRequireDefault(_PieChart);
+
+var _LineGraph = __webpack_require__(198);
+
+var _LineGraph2 = _interopRequireDefault(_LineGraph);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22979,6 +22983,7 @@ var ContentFive = function (_React$Component) {
 			return _react2.default.createElement(
 				'div',
 				{ className: 'content-five' },
+				_react2.default.createElement(_LineGraph2.default, null),
 				_react2.default.createElement(_PieChart2.default, { data: dataOne }),
 				_react2.default.createElement(_PieChart2.default, { data: dataTwo }),
 				_react2.default.createElement(_PieChart2.default, { data: dataThree })
@@ -23253,198 +23258,6 @@ exports.default = NavBar;
 
 /***/ }),
 /* 196 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(12);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _d = __webpack_require__(197);
-
-var d3 = _interopRequireWildcard(_d);
-
-var _reactDom = __webpack_require__(99);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function createChart(dom, props) {
-
-  var width = props.width;
-  var height = props.height;
-  width = width + 200;
-
-  var data = props.data;
-  // console.log(props)
-
-  //takes data and returns the total value of the dataset (100) 
-  var sum = data.reduce(function (memo, num) {
-    return memo + num.count;
-  }, 0);
-  // console.log(sum);
-
-  //selects the dom appends svg element. The "g" (container) element groups svg shapes that are created together and they will move together accordingly
-  var chart = d3.select(dom).append('svg').attr('class', 'd3').attr('width', width).attr('height', height).append("g").attr("transform", "translate(" + props.width / 2 + "," + height / 2 + ")");
-
-  // draws the pie charts innner and outer circles 
-  var outerRadius = props.width / 2.2;
-  var innerRadius = props.width / 8;
-  var arc = d3.arc().outerRadius(outerRadius).innerRadius(innerRadius);
-
-  //.pie creates angles needed for each datum
-  var colors = ['#FD9827', '#DA3B21', '#3669C9', '#1D9524', '#971497'];
-  var pie = d3.pie().value(function (d) {
-    return d.count;
-  });
-
-  // binds the data to the current selection (the arc)
-
-  var g = chart.selectAll(".arc").data(pie(data)).enter().append("g").attr("class", "arc").on('mouseover', function (d, i) {
-    d3.select(this).transition().duration(500).ease(d3.easeBounce).attr('transform', function (d) {
-      var dist = 10;
-      d.midAngle = (d.endAngle - d.startAngle) / 2 + d.startAngle;
-      var x = Math.sin(d.midAngle) * dist;
-      var y = -Math.cos(d.midAngle) * dist;
-      return 'translate(' + x + ',' + y + ')';
-    });
-    d3.select(this).append("text").style("fill", function (d) {
-      return colors[i];
-    }).attr("id", "percent").attr('transform', "translate(0,-5)").attr("text-anchor", "middle").attr("dy", ".35em").style("font", "bold 15px Arial").text(function (d) {
-      return (d.value / sum * 100).toFixed(1) + " %";
-    });
-    g.filter(function (e) {
-      return e.value != d.value;
-    }).style('opacity', 0.5);
-
-    //on mouse out removes the transition and percentage number from showing
-  }).on('mouseout', function (d, i) {
-    d3.select(this).transition().duration(500).ease(d3.easeBounce).attr('transform', 'translate(0,0)');
-    d3.select("#percent").remove();
-    g.filter(function (e) {
-      return e.value != d.value;
-    }).style('opacity', 1);
-  });
-
-  //creates the path and animations
-
-  g.append("path").style("fill", function (d, i) {
-    return colors[i];
-  }).transition().delay(function (d, i) {
-    return i * 800;
-  }).duration(500).attrTween('d', function (d) {
-    console.log(d);
-    var i = d3.interpolate(d.startAngle, d.endAngle);
-    return function (t) {
-      d.endAngle = i(t);
-      return arc(d);
-    };
-  });
-
-  // adds text to the center of each arc
-
-  var center = g.filter(function (d) {
-    return d.endAngle - d.startAngle > .1;
-  }).append("text").style("fill", "white").attr('transform', function (d) {
-    return "translate(" + arc.centroid(d) + ")";
-  }).attr("text-anchor", "middle").attr("dy", ".35em").text(function (d) {
-    return d.value;
-  });
-
-  //  bellow creates the legend 
-
-  var legend = chart.selectAll(".legend").data(data).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
-    return "translate(150," + -i * 20 + ")";
-  });
-
-  var rect = legend.append("rect").attr("width", 18).attr("height", 18).style("fill", function (d, i) {
-    return colors[i];
-  }).style('opacity', 0);
-
-  var name = legend.append("text").attr("x", 24).attr("y", 12).text(function (d) {
-    var text = d.name;
-    if (text.length > 30) {
-      text = text.substring(0, 26);
-      text = text + '...';
-    }
-    return text;
-  }).style('opacity', 0);
-
-  //calls the animations for the legend text and key       
-  rect.transition().delay(function (d, i) {
-    return i * 400;
-  }).duration(1000).style('opacity', 1);
-  name.transition().delay(function (d, i) {
-    return i * 400;
-  }).duration(1000).style('opacity', 1);
-};
-
-var PieChart = function (_React$Component) {
-  _inherits(PieChart, _React$Component);
-
-  function PieChart(props) {
-    _classCallCheck(this, PieChart);
-
-    return _possibleConstructorReturn(this, (PieChart.__proto__ || Object.getPrototypeOf(PieChart)).call(this, props));
-  }
-
-  _createClass(PieChart, [{
-    key: 'render',
-    value: function render() {
-      // console.log(this.props)
-      return _react2.default.createElement('div', null);
-    }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var dom = _reactDom2.default.findDOMNode(this);
-      // console.log(dom)
-      createChart(dom, this.props);
-    }
-  }, {
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate() {
-      var dom = _reactDom2.default.findDOMNode(this);
-      // console.log(dom)
-      createChart(dom, this.props);
-      return false;
-    }
-  }], [{
-    key: 'defaultProps',
-    get: function get() {
-      return {
-        width: 300,
-        height: 350,
-        title: "",
-        Legend: true
-      };
-    }
-  }]);
-
-  return PieChart;
-}(_react2.default.Component);
-
-exports.default = PieChart;
-
-/***/ }),
-/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://d3js.org Version 4.10.0. Copyright 2017 Mike Bostock.
@@ -40358,6 +40171,264 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 
+
+/***/ }),
+/* 197 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(12);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _d = __webpack_require__(196);
+
+var d3 = _interopRequireWildcard(_d);
+
+var _reactDom = __webpack_require__(99);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function createChart(dom, props) {
+
+  var width = props.width;
+  var height = props.height;
+  width = width + 200;
+
+  var data = props.data;
+  // console.log(props)
+
+  //takes data and returns the total value of the dataset (100) 
+  var sum = data.reduce(function (memo, num) {
+    return memo + num.count;
+  }, 0);
+  // console.log(sum);
+
+  //selects the dom appends svg element. The "g" (container) element groups svg shapes that are created together and they will move together accordingly
+  var chart = d3.select(dom).append('svg').attr('class', 'd3').attr('width', width).attr('height', height).append("g").attr("transform", "translate(" + props.width / 2 + "," + height / 2 + ")");
+
+  // draws the pie charts innner and outer circles 
+  var outerRadius = props.width / 2.2;
+  var innerRadius = props.width / 8;
+  var arc = d3.arc().outerRadius(outerRadius).innerRadius(innerRadius);
+
+  //.pie creates angles needed for each datum
+  var colors = ['#FD9827', '#DA3B21', '#3669C9', '#1D9524', '#971497'];
+  var pie = d3.pie().value(function (d) {
+    return d.count;
+  });
+
+  // binds the data to the current selection (the arc)
+
+  var g = chart.selectAll(".arc").data(pie(data)).enter().append("g").attr("class", "arc").on('mouseover', function (d, i) {
+    d3.select(this).transition().duration(500).ease(d3.easeBounce).attr('transform', function (d) {
+      var dist = 10;
+      d.midAngle = (d.endAngle - d.startAngle) / 2 + d.startAngle;
+      var x = Math.sin(d.midAngle) * dist;
+      var y = -Math.cos(d.midAngle) * dist;
+      return 'translate(' + x + ',' + y + ')';
+    });
+    d3.select(this).append("text").style("fill", function (d) {
+      return colors[i];
+    }).attr("id", "percent").attr('transform', "translate(0,-5)").attr("text-anchor", "middle").attr("dy", ".35em").style("font", "bold 15px Arial").text(function (d) {
+      return (d.value / sum * 100).toFixed(1) + " %";
+    });
+    g.filter(function (e) {
+      return e.value != d.value;
+    }).style('opacity', 0.5);
+
+    //on mouse out removes the transition and percentage number from showing
+  }).on('mouseout', function (d, i) {
+    d3.select(this).transition().duration(500).ease(d3.easeBounce).attr('transform', 'translate(0,0)');
+    d3.select("#percent").remove();
+    g.filter(function (e) {
+      return e.value != d.value;
+    }).style('opacity', 1);
+  });
+
+  //creates the path and animations
+
+  g.append("path").style("fill", function (d, i) {
+    return colors[i];
+  }).transition().delay(function (d, i) {
+    return i * 800;
+  }).duration(500).attrTween('d', function (d) {
+    console.log(d);
+    var i = d3.interpolate(d.startAngle, d.endAngle);
+    return function (t) {
+      d.endAngle = i(t);
+      return arc(d);
+    };
+  });
+
+  // adds text to the center of each arc
+
+  var center = g.filter(function (d) {
+    return d.endAngle - d.startAngle > .1;
+  }).append("text").style("fill", "white").attr('transform', function (d) {
+    return "translate(" + arc.centroid(d) + ")";
+  }).attr("text-anchor", "middle").attr("dy", ".35em").text(function (d) {
+    return d.value;
+  });
+
+  //  bellow creates the legend 
+
+  var legend = chart.selectAll(".legend").data(data).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
+    return "translate(150," + -i * 20 + ")";
+  });
+
+  var rect = legend.append("rect").attr("width", 18).attr("height", 18).style("fill", function (d, i) {
+    return colors[i];
+  }).style('opacity', 0);
+
+  var name = legend.append("text").attr("x", 24).attr("y", 12).text(function (d) {
+    var text = d.name;
+    if (text.length > 30) {
+      text = text.substring(0, 26);
+      text = text + '...';
+    }
+    return text;
+  }).style('opacity', 0);
+
+  //calls the animations for the legend text and key       
+  rect.transition().delay(function (d, i) {
+    return i * 400;
+  }).duration(1000).style('opacity', 1);
+  name.transition().delay(function (d, i) {
+    return i * 400;
+  }).duration(1000).style('opacity', 1);
+};
+
+var PieChart = function (_React$Component) {
+  _inherits(PieChart, _React$Component);
+
+  function PieChart(props) {
+    _classCallCheck(this, PieChart);
+
+    return _possibleConstructorReturn(this, (PieChart.__proto__ || Object.getPrototypeOf(PieChart)).call(this, props));
+  }
+
+  _createClass(PieChart, [{
+    key: 'render',
+    value: function render() {
+      // console.log(this.props)
+      return _react2.default.createElement('div', null);
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var dom = _reactDom2.default.findDOMNode(this);
+      // console.log(dom)
+      createChart(dom, this.props);
+    }
+  }, {
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate() {
+      var dom = _reactDom2.default.findDOMNode(this);
+      // console.log(dom)
+      createChart(dom, this.props);
+      return false;
+    }
+  }], [{
+    key: 'defaultProps',
+    get: function get() {
+      return {
+        width: 300,
+        height: 350,
+        title: "",
+        Legend: true
+      };
+    }
+  }]);
+
+  return PieChart;
+}(_react2.default.Component);
+
+exports.default = PieChart;
+
+/***/ }),
+/* 198 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(12);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _d = __webpack_require__(196);
+
+var d3 = _interopRequireWildcard(_d);
+
+var _reactDom = __webpack_require__(99);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LineGraph = function (_React$Component) {
+	_inherits(LineGraph, _React$Component);
+
+	function LineGraph(props) {
+		_classCallCheck(this, LineGraph);
+
+		return _possibleConstructorReturn(this, (LineGraph.__proto__ || Object.getPrototypeOf(LineGraph)).call(this, props));
+	}
+
+	_createClass(LineGraph, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement('div', null);
+		}
+	}], [{
+		key: 'defaultProps',
+		get: function get() {
+			return {
+				width: 800,
+				height: 400,
+				title: "",
+				Legend: true
+			};
+		}
+	}]);
+
+	return LineGraph;
+}(_react2.default.Component);
+
+exports.default = LineGraph;
 
 /***/ })
 /******/ ]);

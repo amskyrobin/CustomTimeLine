@@ -1,5 +1,6 @@
 import React from 'react';
 import PieChart from './ContentFiveSubponents/PieChart.jsx';
+import LineGraph from './ContentFiveSubponents/LineGraph.jsx';
 
 
 
@@ -47,6 +48,7 @@ class ContentFive extends React.Component {
 
 
 			<div className="content-five">
+				<LineGraph />
 				<PieChart data={dataOne}/>
 				<PieChart data={dataTwo}/>
 				<PieChart data={dataThree}/>
