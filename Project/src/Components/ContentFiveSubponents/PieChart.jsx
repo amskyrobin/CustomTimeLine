@@ -41,6 +41,10 @@ function createChart(dom, props){
         .data(pie(data))
         .enter().append("g")
         .attr("class", "arc")
+
+
+// the animation that bounces the pie chart segment out 
+
         .on('mouseover', function (d, i) {
           d3.select(this)
             .transition()
@@ -53,11 +57,18 @@ function createChart(dom, props){
               var y = -Math.cos(d.midAngle) * dist;
               return 'translate(' + x + ',' + y + ')';
             });
+
+//animation for putting the percentage in the middle of the pie chart when segement is selected
+
+
           d3.select(this).append("text").style("fill", function(d) { return colors[i]; }).attr("id", "percent")
           .attr('transform', "translate(0,-5)")
           .attr("text-anchor", "middle").attr("dy", ".35em").style("font", "bold 15px Arial")
           .text(function(d) { return (((d.value/sum)*100).toFixed(1) + " %"); });
+
+//turns the unselected segments opacity down (fades them out)          
           g.filter(function(e) { return e.value != d.value; }).style('opacity',0.5);
+          
         
 //on mouse out removes the transition and percentage number from showing
 
