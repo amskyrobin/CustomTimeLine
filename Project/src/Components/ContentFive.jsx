@@ -44,11 +44,26 @@ class ContentFive extends React.Component {
 			{name: "equity", count: 28}
 		];
 
+
+	var lineGraphData =
+	 [
+	 	[
+		{name: "fixed income", percentage: 68, date: "30/06/2009"},
+		{name: "fixed income", percentage: 50, date: "30/06/2012"},
+		{name: "fixed income", percentage: 38, date: "31/12/2016"},
+		],
+		[
+		{name: "equity", percentage: 31, date: "30/06/2009"},
+		{name: "equity", percentage: 49, date: "30/06/2012"},
+		{name: "equity", percentage: 59, date: "31/12/2016"}
+		]
+	]
+
 		return (
 
 
 			<div className="content-five">
-				<LineGraph />
+				<LineGraph data={lineGraphData} />
 				<PieChart data={dataOne}/>
 				<PieChart data={dataTwo}/>
 				<PieChart data={dataThree}/>
