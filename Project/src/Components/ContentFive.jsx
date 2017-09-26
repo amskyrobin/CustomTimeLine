@@ -63,10 +63,11 @@ class ContentFive extends React.Component {
 
 
 			<div className="content-five">
-				<LineGraph data={lineGraphData} />
+				<LineGraph data={lineGraphData}/>
 				<PieChart data={dataOne}/>
 				<PieChart data={dataTwo}/>
 				<PieChart data={dataThree}/>
+				
 			</div>
 			)
 	}

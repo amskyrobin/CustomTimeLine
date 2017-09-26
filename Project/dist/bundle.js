@@ -40082,7 +40082,7 @@ var PieChart = function (_React$Component) {
     key: 'render',
     value: function render() {
       // console.log(this.props)
-      return _react2.default.createElement('div', null);
+      return _react2.default.createElement('div', { className: 'pie-container' });
     }
   }, {
     key: 'componentDidMount',
@@ -40163,16 +40163,15 @@ function createLineGraph(dom, props) {
 
 	var xScale = d3.scaleTime().domain(d3.extent(data, date)).range([0, width]);
 
-	var selectScaledX = function selectScaledX(data) {
-		return xScale(date(data));
-	};
-	var selectScaledY = function selectScaledY(data) {
-		return yScale(percentage(data));
-	};
+	var parseTime = d3.timeParse("%d-%b-%y");
 
-	var sparkLine = d3.line().x(selectScaledX).y(selectScaledY);
+	var sparkLine = d3.line().x(function (data) {
+		return x(data.date);
+	}).y(function (data) {
+		return y(data.percentage);
+	});
 
-	var linePath = sparkLine(data);
+	var chart = d3.select(dom).append('svg').attr('class', 'd3').attr('width', width).attr('height', height).append("g").attr("transform", "translate(" + props.width / 2 + "," + height / 2 + ")");
 }
 
 var LineGraph = function (_React$Component) {
@@ -40187,7 +40186,7 @@ var LineGraph = function (_React$Component) {
 	_createClass(LineGraph, [{
 		key: 'render',
 		value: function render() {
-			return _react2.default.createElement('div', null);
+			return _react2.default.createElement('div', { className: 'line-graph-container' });
 		}
 	}, {
 		key: 'componentDidMount',
@@ -40208,8 +40207,8 @@ var LineGraph = function (_React$Component) {
 		key: 'defaultProps',
 		get: function get() {
 			return {
-				width: 800,
-				height: 400,
+				width: 1000,
+				height: 500,
 				title: "",
 				Legend: true
 			};

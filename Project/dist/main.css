@@ -201,8 +201,19 @@ button {
 /*----------------------------------------------- CONTENT FIVE ----------------------------------------------*/
 
 .content-five {
-	display: flex;
+	
 	background-color: salmon;
-	height:700px;
+	height:1000px;
 
+}
+
+.pie-container {
+	height:350px;
+	width: 450px;
+	display: inline-block;
+}
+
+.line-graph-container {
+	height: 500px;
+	width: 1000px;
 }

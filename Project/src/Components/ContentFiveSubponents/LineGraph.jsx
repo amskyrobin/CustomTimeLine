@@ -20,18 +20,16 @@ var xScale = d3.scaleTime()
 			.domain(d3.extent(data, date ))
 			.range([0, width]);
 
-			
-
-const selectScaledX = data => xScale(date(data));
-const selectScaledY = data => yScale(percentage(data));
+var parseTime = d3.timeParse("%d-%b-%y");	
 
 	
 const sparkLine = d3.line()
-    				.x(selectScaledX)
-    				.y(selectScaledY);
+    				.x(function(data) { return x(data.date);})
+    				.y(function(data){return y(data.percentage)});
 
-const linePath = sparkLine(data);
-
+  var chart = d3.select(dom).append('svg').attr('class', 'd3').attr('width', width).attr('height', height)
+        .append("g")
+          .attr("transform", "translate(" + (props.width/2) + "," + (height/2) + ")");
 
 }
 
@@ -50,8 +48,8 @@ class LineGraph extends React.Component {
 
 	static get defaultProps () {
 		return {
-			width: 800,
-			height: 400,
+			width: 1000,
+			height: 500,
 			title: "",
 			Legend: true
 		}
@@ -59,7 +57,7 @@ class LineGraph extends React.Component {
 
 	render (){
 		return (
-			<div>
+			<div className="line-graph-container">
 			</div>
 			)
 	}
