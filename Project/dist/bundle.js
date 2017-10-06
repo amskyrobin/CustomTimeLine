@@ -39896,12 +39896,10 @@ var ContentFive = function (_React$Component) {
 
 			var dataThree = [{ name: "fixed income", count: 60 }, { name: "cash", count: 12 }, { name: "equity", count: 28 }];
 
-			var lineGraphData = [[{ name: "fixed income", percentage: 68, date: "30/06/2009" }, { name: "fixed income", percentage: 50, date: "30/06/2012" }, { name: "fixed income", percentage: 38, date: "31/12/2016" }], [{ name: "equity", percentage: 31, date: "30/06/2009" }, { name: "equity", percentage: 49, date: "30/06/2012" }, { name: "equity", percentage: 59, date: "31/12/2016" }]];
-
 			return _react2.default.createElement(
 				'div',
 				{ className: 'content-five' },
-				_react2.default.createElement(_LineGraph2.default, { data: lineGraphData }),
+				_react2.default.createElement(_LineGraph2.default, null),
 				_react2.default.createElement(_PieChart2.default, { data: dataOne }),
 				_react2.default.createElement(_PieChart2.default, { data: dataTwo }),
 				_react2.default.createElement(_PieChart2.default, { data: dataThree })
@@ -40023,7 +40021,7 @@ function createChart(dom, props) {
   }).transition().delay(function (d, i) {
     return i * 800;
   }).duration(500).attrTween('d', function (d) {
-    console.log(d);
+    // console.log(d)
     var i = d3.interpolate(d.startAngle, d.endAngle);
     return function (t) {
       d.endAngle = i(t);
@@ -40118,107 +40116,10 @@ exports.default = PieChart;
 
 /***/ }),
 /* 193 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(8);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _d = __webpack_require__(85);
-
-var d3 = _interopRequireWildcard(_d);
-
-var _reactDom = __webpack_require__(36);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function createLineGraph(dom, props) {
-
-	var width = props.width;
-	var height = props.height;
-	var data = props.data;
-	var percentage = props.data.percentage;
-	var date = props.data.date;
-
-	var yScale = d3.scaleLinear().domain(d3.extent(data, percentage)).range([height, 0]);
-
-	var xScale = d3.scaleTime().domain(d3.extent(data, date)).range([0, width]);
-
-	var parseTime = d3.timeParse("%d-%b-%y");
-
-	var sparkLine = d3.line().x(function (data) {
-		return x(data.date);
-	}).y(function (data) {
-		return y(data.percentage);
-	});
-
-	var chart = d3.select(dom).append('svg').attr('class', 'd3').attr('width', width).attr('height', height).append("g").attr("transform", "translate(" + props.width / 2 + "," + height / 2 + ")");
-}
-
-var LineGraph = function (_React$Component) {
-	_inherits(LineGraph, _React$Component);
-
-	function LineGraph(props) {
-		_classCallCheck(this, LineGraph);
-
-		return _possibleConstructorReturn(this, (LineGraph.__proto__ || Object.getPrototypeOf(LineGraph)).call(this, props));
-	}
-
-	_createClass(LineGraph, [{
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement('div', { className: 'line-graph-container' });
-		}
-	}, {
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var dom = _reactDom2.default.findDOMNode(this);
-			// console.log(dom)
-			createLineGraph(dom, this.props);
-		}
-	}, {
-		key: 'shouldComponentUpdate',
-		value: function shouldComponentUpdate() {
-			var dom = _reactDom2.default.findDOMNode(this);
-			// console.log(dom)
-			createLineGraph(dom, this.props);
-			return false;
-		}
-	}], [{
-		key: 'defaultProps',
-		get: function get() {
-			return {
-				width: 1000,
-				height: 500,
-				title: "",
-				Legend: true
-			};
-		}
-	}]);
-
-	return LineGraph;
-}(_react2.default.Component);
-
-exports.default = LineGraph;
+throw new Error("Module build failed: SyntaxError: C:/Users/arobins4/Franklin Income Fund/Project/src/Components/ContentFiveSubponents/LineGraph.jsx: Unexpected token (13:0)\n\n  11 | var parseTime = d3.timeParse(\"%b-%y\");\t\n  12 | var formatTime = \n> 13 | var data = d3.csv('ten-year-asset-allocation.csv', function(error, data){\n     | ^\n  14 | \t\n  15 | \tdata.forEach(function(d){\n  16 | \t\td.Date = parseTime(d.Date)\n");
 
 /***/ }),
 /* 194 */

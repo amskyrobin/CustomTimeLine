@@ -88,7 +88,7 @@ function createChart(dom, props){
     .style("fill", function(d, i) { return colors[i]; })
     .transition().delay(function(d, i) { return i * 800; }).duration(500)
     .attrTween('d', function(d) {
-        console.log(d)
+        // console.log(d)
          var i = d3.interpolate(d.startAngle, d.endAngle);
          return function(t) {
              d.endAngle = i(t);

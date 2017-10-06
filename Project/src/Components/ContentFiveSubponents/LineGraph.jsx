@@ -7,25 +7,45 @@ function createLineGraph(dom, props) {
 
 var width = props.width;
 var height = props.height;
-var data = props.data;
-var percentage = props.data.percentage
-var date = props.data.date
+
+var parseTime = d3.timeParse("%b-%y");	
+var formatTime = 
+var data = d3.csv('ten-year-asset-allocation.csv', function(error, data){
+	
+	data.forEach(function(d){
+		d.Date = parseTime(d.Date)
+		console.log(d.Date)
+		d.count = +d.count	
+		
+
+	})
+})
+
+var x = d3.scaleTime()
+		.rangeRound([0, width])
+
+		console.log(x)
+
+var y = d3.scaleLinear()
+		.rangeRound([height, 0])
+
+var line = d3.line()
+.x(function(d){return x(d.Date)})
+.y(function(d){return y(d.Equity)})
 
 
-var yScale = d3.scaleLinear()
-			.domain(d3.extent(data, percentage))
-			.range([height, 0]);
 
-var xScale = d3.scaleTime()
-			.domain(d3.extent(data, date ))
-			.range([0, width]);
 
-var parseTime = d3.timeParse("%d-%b-%y");	
+
+
+
+
+
+
+
 
 	
-const sparkLine = d3.line()
-    				.x(function(data) { return x(data.date);})
-    				.y(function(data){return y(data.percentage)});
+
 
   var chart = d3.select(dom).append('svg').attr('class', 'd3').attr('width', width).attr('height', height)
         .append("g")
